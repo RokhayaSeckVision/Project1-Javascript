@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style type="text/css">
+        *{
+          box-sizing: border-box;
+        }
+  
+        body{
+          background-color: blanchedalmond;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 100vh;
+          margin: 0;
+  
+        }
+  
+        .numbers {
+          background-color: darkcyan;
+          border-radius: 5px;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 3);
+          width: 400px;
+          max-width: 100%;
+        }
+  
+        .b1{
+          background-color: aquamarine;
+        }
+  
+        .b2{
+          background-color: blanchedalmond;
+        }
+  
+      </style>
+
+</head>
+<body>
+    <div class="container">
+        <form id="form" action="/">
+            <h1>Entrer deux Entiers: </h1>
+            <div class="numbers">
+            <div class="input-control">
+                <label for="num1">Nombre 1</label>
+                <input id="num1" name="num1" type="text">
+                <div class="error"></div>
+            </div>
+            <div class="input-control">
+                <label for="num2">Nombre 2</label>
+                <input id="num2" name="num2" type="text">
+                <div class="error"></div>
+            </div>
+          </div>
+            <button class="b1"  type="submit">Calculer</button><br><br><br>
+            <button class="b2" value="Reset" onclick="reset()">Réinitialiser</button>
+
+        </form>
+    </div>
+
+    <script>
+const form = document.getElementById('form');
+const num1 = document.getElementById('num1');
+const num2 = document.getElementById('num2');
+
+
+form.addEventListener('submit', e => {
+    e.preventDefault();
+
+    validateInputs();
+    window.alert('la sommes est de'+ (num1 + num2) );
+    window.alert('le produit est de'+ (num1 * num2) );
+    window.alert('la division est de'+ (num1 / num2) );
+
+
+});
+
+const setError = (element, message) => {
+    const inputControl = element.parentElement;
+    const errorDisplay = inputControl.querySelector('.error');
+
+    errorDisplay.innerText = message;
+    inputControl.classList.add('error');
+    inputControl.classList.remove('success')
+}
+
+const setSuccess = element => {
+    const inputControl = element.parentElement;
+    const errorDisplay = inputControl.querySelector('.error');
+
+    errorDisplay.innerText = '';
+    inputControl.classList.add('success');
+    inputControl.classList.remove('error');
+};
+
+
+const validateInputs = () => {
+    const num1value = num1.value.trim();
+    const num2value = num2.value.trim();
+
+
+    if(num1value === '' || num1value!=Number) {
+        setError(num1, 'Entrer un nombre');
+    } else {
+        setSuccess(num1);
+    }
+
+    if(num2value === '' || num2value!=Number) {
+        setError(num2, ' Enter un nombre');
+    } else if (num2 = 0) {
+        setError(num2, ' nombre 2 ne peut pas etre nul');
+    } else {
+        setSuccess(num2);
+    }
+
+};
+
+
+function reset(){
+    num1 = "0";
+    num2 = "0";
+  } 
+    </script>
+
+</body>
+</html>
